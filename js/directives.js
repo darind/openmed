@@ -1,0 +1,28 @@
+(function () {
+'use strict';
+    angular.module('patientsApp').directive('ngUnique', ['$routeParams', 'patientsService', function ($routeParams, patientsService) {
+        return {
+            require: 'ngModel',
+            link: function (scope, elem, attrs, ctrl) {
+                elem.on('blur', function (evt) {
+                    scope.$apply(function () {
+                        ctrl.$setValidity('unique', true);
+
+                        if (!ctrl.$valid) {
+                            return;
+                        }
+
+                        var egn = elem.val();
+                        if (scope.origEGN && scope.origEGN != egn) {
+                            var patient = patientsService.find({ egn: egn });
+                            ctrl.$setValidity('unique', patient == null);
+                        } else if (!scope.origEGN) {
+                            var patient = patientsService.find({ egn: egn });
+                            ctrl.$setValidity('unique', patient == null);
+                        }
+                    });
+                });
+            }
+        };
+    }]);
+})();

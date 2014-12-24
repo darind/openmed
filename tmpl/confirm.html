@@ -1,0 +1,14 @@
+<div class="modal-header dialog-header-confirm">
+    <button type="button" class="close" ng-click="no()">&times;</button>
+    <h4 class="modal-title">
+        <span class="glyphicon glyphicon-check"></span> 
+        Изтриване на пациент?
+    </h4>
+</div>
+<div class="modal-body">
+    {{patient.egn}} - {{patient.name}}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="yes()">Да</button>
+    <button type="button" class="btn btn-primary" ng-click="no()">Не</button>
+</div>

@@ -1,0 +1,6 @@
+**/node_modules/*
+**/libs/*
+**/output/*
+**/*.log
+patients.json
+npm-debug.log

@@ -1,0 +1,33 @@
+body {
+    padding-top: 50px;
+}
+#container {
+    padding: 39px 0px;
+}
+.thumb-big
+{
+    height: 199px;
+}
+.movies-list
+{
+    text-align: center;
+}
+.availability
+{
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 500;
+    color: black;
+}
+.bookThumb
+{
+    height: 149px;
+    padding-right: 21px;
+}
+
+.modal { 
+    display: block;
+}
+ 
+.dialog-header-confirm { background-color: #333333; }
+.dialog-header-confirm span, .dialog-header-confirm h4 { color: #ffffff; }

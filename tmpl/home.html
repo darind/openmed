@@ -1,0 +1,39 @@
+<div>
+    <input type="text" placeholder="Филтриране на пациенти по ЕГН или име" class="form-control" data-ng-model="search" />
+</div>
+
+<br/>
+
+<table st-table="patients" class="table table-striped">
+    <thead>
+        <tr>
+            <th st-sort="name">Име</th>
+            <th st-sort="egn">ЕГН</th>
+            <th st-sort="firstVisit">Първичен преглед</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-ng-repeat="patient in patients | patientFilter:search">
+            <td>
+                <a class="btn btn-default btn-sm" ng-href="#/edit/{{patient.id}}">
+                    <span class="glyphicon glyphicon-pencil"></span> {{patient.name}}
+                </a>
+            </td>
+            <td>{{patient.egn}}</td>
+            <td>{{patient.firstVisit | date: 'dd.MM.yyyy'}}</td>
+            <td>
+                <button type="button" ng-click="delete(patient)" class="btn btn-danger btn-xs">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-center">
+                <div st-pagination="" st-items-by-page="15"></div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
