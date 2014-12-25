@@ -14,16 +14,20 @@
         </tr>
     </thead>
     <tbody>
-        <tr data-ng-repeat="patient in patients | patientFilter:search">
+        <tr data-ng-repeat="patient in patients | patientFilter:search track by patient.id">
             <td>
                 <a class="btn btn-default btn-sm" ng-href="#/edit/{{patient.id}}">
                     <span class="glyphicon glyphicon-pencil"></span> {{patient.name}}
                 </a>
             </td>
-            <td>{{patient.egn}}</td>
-            <td>{{patient.firstVisit | date: 'dd.MM.yyyy'}}</td>
             <td>
-                <button type="button" ng-click="delete(patient)" class="btn btn-danger btn-xs">
+                {{patient.egn}}
+            </td>
+            <td>
+                {{firstVisit(patient).date | date: 'dd.MM.yyyy'}}
+            </td>
+            <td>
+                <button type="button" ng-click="delete(patient)" class="btn btn-danger btn-xs" tooltip="Изтриване на пациент">
                   <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

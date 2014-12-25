@@ -14,16 +14,17 @@
     <script type="text/javascript" src="libs/angular-smart-table/dist/smart-table.min.js"></script>
 
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/services/services.js"></script>
+    <script type="text/javascript" src="js/services/patients.js"></script>
     <script type="text/javascript" src="js/controllers/patients.js"></script>
     <script type="text/javascript" src="js/controllers/patientDetails.js"></script>
+    <script type="text/javascript" src="js/controllers/exam.js"></script>
     <script type="text/javascript" src="js/controllers/confirmDialog.js"></script>
     <script type="text/javascript" src="js/filters.js"></script>
     <script type="text/javascript" src="js/directives.js"></script>
     <script type="text/javascript" src="js/router/routes.js"></script>
 </head>
 <body class="container" data-ng-controller="patientsController">
-    <div data-ng-include src="headerSrc"></div>
+    <div data-ng-include src="'tmpl/header.html'"></div>
     <div id="container">
         <div data-ng-view=""></div>
     </div>

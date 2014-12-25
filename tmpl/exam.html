@@ -1,0 +1,64 @@
+<div class="modal-header dialog-header-confirm">
+    <button type="button" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title">
+        <span class="glyphicon glyphicon-check"></span> 
+        Редактиране
+    </h4>
+</div>
+<div class="modal-body" style="padding:20px 50px 0;">
+    <form name="examForm" novalidate>
+        <div class="row">
+            <div class="form-group">
+                <label for="date">Дата *</label>
+                <p class="input-group">
+                    <input type="text" class="form-control" id="date" is-open="opened" datepicker-popup="dd.MM.yyyy" show-button-bar="false" ng-model="exam.date" is-open="false" show-weeks="false" starting-day="1" close-text="Close" ng-focus="open($event)" required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="history">Анамнеза</label>
+                <textarea id="history" ng-model="exam.history" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="condition">Обективно състояние</label>
+                <textarea id="condition" ng-model="exam.condition" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="tests">Изследвания</label>
+                <textarea id="tests" ng-model="exam.tests" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="ultrasound">Резултат от ултразвук</label>
+                <textarea id="ultrasound" ng-model="exam.ultrasound" class="form-control"></textarea>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="form-group">
+                <label for="treatment">Лечение</label>
+                <textarea id="treatment" ng-model="exam.treatment" class="form-control"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary pull-left" ng-click="save(exam)" ng-disabled="!examForm.$valid">OK</button>
+    <button type="button" class="btn btn-warning" ng-click="close()">Анулиране</button>
+</div>

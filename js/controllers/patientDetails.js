@@ -1,10 +1,15 @@
 (function () {
 'use strict';
-    angular.module('patientsApp').controller('patientDetailsController', function ($scope, $location, $routeParams, $window, patientsService) {
+    angular.module('patientsApp').controller('patientDetailsController', function ($scope, $location, $routeParams, $modal, patientsService) {
         var id = $routeParams.id;
         if (id) {
-            $scope.patient = patientsService.find({ id: id });
+            $scope.patient = angular.copy(patientsService.find({ id: id }));
             $scope.origEGN = angular.copy($scope.patient.egn);
+        } else {
+            $scope.patient = { 
+                name: '',
+                egn: ''
+            };
         }
 
         $scope.save = function(patient) {
@@ -17,10 +22,38 @@
             $location.path('/');
         };
 
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $scope.opened = true;
+        $scope.addExam = function(patient) {
+            showExamDialog($modal, null, function(newExam) {
+                patient.examinations.push(newExam);
+            });
+        };
+
+        $scope.editExam = function(exam) {
+            showExamDialog($modal, exam, function(updatedExam) {
+                for (var key in updatedExam) {
+                    if (updatedExam.hasOwnProperty(key)) {
+                        exam[key] = updatedExam[key];
+                    }
+                }
+            });
+        };
+
+        $scope.deleteExam = function(exam) {
+            var exams = $scope.patient.examinations;
+            exams.splice(exams.indexOf(exam), 1);
         };
   	});
+
+    function showExamDialog(modal, exam, next) {
+        modal.open({
+            templateUrl: 'tmpl/exam.html',
+            controller: 'examController',
+            size: 'lg',
+            backdropClass: 'backdrop',
+            backdrop: 'static',
+            resolve: {
+                exam: function() { return exam; }
+            }
+        }).result.then(next);
+    }
 })();
