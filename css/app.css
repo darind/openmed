@@ -1,28 +1,13 @@
+.onlyprint {
+    display: none;
+}
+
 body {
     padding-top: 50px;
 }
+
 #container {
     padding: 39px 0px;
-}
-.thumb-big
-{
-    height: 199px;
-}
-.movies-list
-{
-    text-align: center;
-}
-.availability
-{
-    padding: 9px;
-    font-size: 12px;
-    font-weight: 500;
-    color: black;
-}
-.bookThumb
-{
-    height: 149px;
-    padding-right: 21px;
 }
 
 .modal { 
@@ -46,4 +31,14 @@ body {
     z-index: 1030;
     background-color: #333333;
     opacity:0.8;
+}
+
+@media print {
+    .onlyscreen {
+        display: none;
+    }
+
+    .onlyprint {
+        display: block;
+    }
 }

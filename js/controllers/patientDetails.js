@@ -12,6 +12,10 @@
             };
         }
 
+        $scope.print = function(patient) {
+            window.print();
+        };
+
         $scope.save = function(patient) {
             if (!id) {
                 patientsService.insert(patient)
@@ -24,6 +28,9 @@
 
         $scope.addExam = function(patient) {
             showExamDialog($modal, null, function(newExam) {
+                if (!patient.examinations) {
+                    patient.examinations = [];
+                }
                 patient.examinations.push(newExam);
             });
         };

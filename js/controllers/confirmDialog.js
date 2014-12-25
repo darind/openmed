@@ -10,5 +10,5 @@
         $scope.yes = function() {
             $modalInstance.close('yes');
         };
-    }]);    
+    }]);
 })();

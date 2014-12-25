@@ -21,7 +21,7 @@
                 var ellipsis = text.length > length ? '...' : '';
                 return text.slice(0, length) + ellipsis;
             };
-            return text;        
+            return text;
         }
     });
 })();
