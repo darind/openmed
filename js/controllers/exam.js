@@ -15,7 +15,7 @@
 
         $scope.$watch('exam.date', function(newValue, oldValue) {
             $scope.exam.isPrimary = isPrimary(patient, $scope.exam);
-        });        
+        });
 
         $scope.open = function($event) {
             $event.preventDefault();

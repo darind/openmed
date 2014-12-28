@@ -1,6 +1,9 @@
 (function () {
 'use strict';
-    angular.module('patientsApp').directive('ngUnique', ['$routeParams', 'patientsService', function ($routeParams, patientsService) {
+    var moment = require('moment'),
+        app    = angular.module('patientsApp');
+
+    app.directive('ngUnique', ['$routeParams', 'patientsService', function ($routeParams, patientsService) {
         return {
             require: 'ngModel',
             link: function (scope, elem, attrs, ctrl) {
@@ -25,4 +28,25 @@
             }
         };
     }]);
+
+    app.directive('awDatepickerPattern', function() {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function(scope, elem, attrs, ngModelCtrl) {
+                ngModelCtrl.$parsers.unshift(function(value) {
+                    if (typeof value === 'string') {
+                        var date = moment(value, attrs.awDatepickerPattern, true);
+                        var isValid = date.isValid();
+                        ngModelCtrl.$setValidity('date', isValid);
+                        if (!isValid) {
+                            return undefined;
+                        }
+                    }
+
+                    return value;
+                });
+            }
+        };
+    });
 })();
