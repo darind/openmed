@@ -1,23 +1,40 @@
-<div class="modal-header dialog-header-confirm">
+<div class="modal-header dialog-header-confirm onlyscreen">
     <button type="button" class="close" ng-click="close()">&times;</button>
     <h4 class="modal-title">
         <span class="glyphicon glyphicon-check"></span> 
         Редактиране
     </h4>
 </div>
-<div class="modal-body" style="padding:20px 50px 0;">
+
+<div class="modal-body onlyscreen" style="padding:20px 50px 0;">
     <form name="examForm" novalidate>
         <div class="row">
             <div class="form-group">
                 <label for="date">Дата *</label>
                 <p class="input-group">
-                    <input type="text" class="form-control" id="date" is-open="opened" datepicker-popup="dd.MM.yyyy" show-button-bar="false" ng-model="exam.date" is-open="false" show-weeks="false" starting-day="1" close-text="Close" ng-focus="open($event)" required />
+                    <input type="text" class="form-control" id="date" is-open="opened" datepicker-popup="dd.MM.yyyy" show-button-bar="false" ng-model="exam.date" is-open="false" show-weeks="false" starting-day="1" close-text="Close" required />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open($event)">
                             <i class="glyphicon glyphicon-calendar"></i>
                         </button>
                     </span>
                 </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label>Тип преглед</label>
+                <div class="input-group">
+                    <label>
+                        <input type="radio" name="isPrimary" ng-model="exam.isPrimary" ng-value="true" />
+                        Първичен
+                    </label>
+                    <label style="padding-left: 30px;">
+                        <input type="radio" name="isPrimary" ng-model="exam.isPrimary" ng-value="false" />
+                        Вторичен
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -49,6 +66,12 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-group">
+                <label for="diagnosis">Диагноза</label>
+                <textarea id="diagnosis" ng-model="exam.diagnosis" class="form-control"></textarea>
+            </div>
+        </div>
 
         <div class="row">
             <div class="form-group">
@@ -58,7 +81,59 @@
         </div>
     </form>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-primary pull-left" ng-click="save(exam)" ng-disabled="!examForm.$valid">OK</button>
-    <button type="button" class="btn btn-warning" ng-click="close()">Анулиране</button>
+
+<div class="onlyprint" style="padding-left: 20px;">
+    <div class="row">
+        <h4>Дата</h4>
+        <pre>{{exam.date | date:'dd.MM.yyyy'}}</pre>
+    </div>
+    <div class="row">
+        <h4>Тип преглед</h4>
+        <pre ng-if="exam.isPrimary">Първичен</pre>
+        <pre ng-if="!exam.isPrimary">Вторичен</pre>
+    </div>
+    <div class="row">
+        <h4>Име</h4>
+        <pre>{{patient.name}}</pre>
+    </div>
+    <div class="row">
+        <h4>ЕГН</h4>
+        <pre>{{patient.egn}}</pre>
+    </div>
+    <div class="row">
+        <h4>Анамнеза</h4>
+        <pre>{{exam.history}}</pre>
+    </div>
+    <div class="row">
+        <h4>Обективно състояние</h4>
+        <pre>{{exam.condition}}</pre>
+    </div>
+    <div class="row">
+        <h4>Изследвания</h4>
+        <pre>{{exam.tests}}</pre>
+    </div>
+    <div class="row">
+        <h4>Резултат от ултразвук</h4>
+        <pre>{{exam.ultrasound}}</pre>
+    </div>
+    <div class="row">
+        <h4>Диагноза</h4>
+        <pre>{{exam.diagnosis}}</pre>
+    </div>
+    <div class="row">
+        <h4>Лечение</h4>
+        <pre>{{exam.treatment}}</pre>
+    </div>
+</div>
+
+<div class="modal-footer onlyscreen">
+    <button type="button" class="btn btn-primary pull-left" ng-click="save(exam)" ng-disabled="!examForm.$valid">
+        <span class="glyphicon glyphicon-ok"></span> OK
+    </button>
+    <button type="button" class="btn btn-success btn-md" ng-click="print()">
+        <span class="glyphicon glyphicon-print"></span> Разпечатай
+    </button>
+    <button type="button" class="btn btn-warning" ng-click="close()">
+        <span class="glyphicon glyphicon-remove"></span> Анулиране
+    </button>
 </div>

@@ -23,9 +23,9 @@
     <script type="text/javascript" src="js/directives.js"></script>
     <script type="text/javascript" src="js/router/routes.js"></script>
 </head>
-<body class="container" data-ng-controller="patientsController">
-    <div data-ng-include src="'tmpl/header.html'"></div>
-    <div id="container">
+<body data-ng-controller="patientsController">
+    <div class="onlyscreen" data-ng-include src="'tmpl/header.html'"></div>
+    <div id="container" class="onlyscreen">
         <div data-ng-view=""></div>
     </div>
 </body>

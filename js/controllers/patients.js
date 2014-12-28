@@ -1,6 +1,7 @@
 (function () {
 'use strict';
-    angular.module('patientsApp').controller('patientsController', function ($scope, $location, $modal, patientsService) {
+    var app = angular.module('patientsApp');
+    app.controller('patientsController', ['$scope', '$location', '$modal', 'patientsService', function ($scope, $location, $modal, patientsService) {
         $scope.patients = patientsService.findAll();
 
         $scope.delete = function(patient) {
@@ -33,5 +34,5 @@
                 return b;
             });
         }
-    });
+    }]);
 })();

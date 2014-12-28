@@ -1,10 +1,4 @@
-﻿<div class="onlyscreen" style="padding-bottom: 20px;">
-    <button type="button" class="btn btn-primary btn-md" ng-click="print(patient)">
-        <span class="glyphicon glyphicon-print"></span> Разпечатай
-    </button>
-</div>
-
-<form name="patientForm" class="css-form" novalidate>
+﻿<form name="patientForm" class="css-form onlyscreen" novalidate>
     <div class="form-group has-feedback" ng-class="{'has-error': !patientForm.name.$valid}">
         <label for="name">Име *</label>
         <input type="text" id="name" ng-model="patient.name" class="form-control" placeholder="Име на пациент" name="name" required />
@@ -16,14 +10,14 @@
         <span ng-show="patientForm.egn.$error.unique">Пациент с посоченото ЕГН вече съществува</span>
     </div>
 
-    <h4 class="onlyscreen">
-        <button type="button" ng-click="addExam(patient)" class="btn btn-success btn-sm onlyscreen" tooltip="Добавяне на нов преглед">
+    <h4>
+        <button type="button" ng-click="addExam(patient)" class="btn btn-success btn-sm" tooltip="Добавяне на нов преглед">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
         Списък с прегледи
     </h4>
 
-    <table st-table="patient.examinations" class="table table-striped onlyscreen">
+    <table st-table="patient.examinations" class="table table-striped">
         <thead>
             <tr>
                 <th>Дата</th>
@@ -31,6 +25,7 @@
                 <th>Обективно състояние</th>
                 <th>Изследвания</th>
                 <th>Р-т от ултразвук</th>
+                <th>Диагноза</th>
                 <th>Лечение</th>
                 <th></th>
             </tr>
@@ -38,14 +33,16 @@
         <tbody>
             <tr data-ng-repeat="exam in patient.examinations | orderBy:'date':true track by $index">
                 <td>
-                    <a href="" ng-click="editExam(exam)">
+                    <a href="" ng-click="editExam(exam, patient)">
                         {{exam.date | date: 'dd.MM.yyyy'}}
                     </a>
+                    <span ng-class="{'glyphicon glyphicon-exclamation-sign': exam.isPrimary}" tooltip="Първичен преглед"></span>
                 </td>
                 <td>{{exam.history | truncate:15}}</td>
                 <td>{{exam.condition | truncate:15}}</td>
                 <td>{{exam.tests | truncate:15}}</td>
                 <td>{{exam.ultrasound | truncate:15}}</td>
+                <td>{{exam.diagnosis | truncate:15}}</td>
                 <td>{{exam.treatment | truncate:15}}</td>
                 <td>
                     <button type="button" ng-click="deleteExam(exam)" class="btn btn-danger btn-xs" tooltip="Изтриване на преглед">
@@ -56,35 +53,11 @@
         </tbody>
     </table>
 
-    <div class="onlyprint" data-ng-repeat="exam in patient.examinations | orderBy:'date':true track by $index">
-        <div class="row">
-            <div>
-                <div class="thumbnail">
-                    <div class="caption">
-                        <h3>{{exam.date | date: 'dd.MM.yyyy'}}</h3>
-                        <h4>Анамнеза</h4>
-                        <p>{{exam.history}}</p>
-                        <h4>Обективно състояние</h4>
-                        <p>{{exam.condition}}</p>
-                        <h4>Изследвания</h4>
-                        <p>{{exam.tests}}</p>
-                        <h4>Резултат от ултразвук</h4>
-                        <p>{{exam.ultrasound}}</p>
-                        <h4>Лечение</h4>
-                        <p>{{exam.treatment}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button type="button" ng-click="save(patient)" ng-disabled="!patientForm.$valid" class="btn btn-primary btn-md" tooltip="Съхраняване данни на пациент">
+        <span class="glyphicon glyphicon-floppy-disk"></span> Запази
+    </button>
 
-    <div class="onlyscreen">
-        <button type="button" ng-click="save(patient)" ng-disabled="!patientForm.$valid" class="btn btn-primary btn-md" tooltip="Съхраняване данни на пациент">
-            <span class="glyphicon glyphicon-floppy-disk"></span> Запази
-        </button>
-
-        <a class="btn btn-warning btn-md pull-right" href="#/" tooltip="Анулиране на промените">
-            <span class="glyphicon glyphicon-remove"></span> Анулиране
-        </a>
-    </div>
+    <a class="btn btn-warning btn-md pull-right" href="#/" tooltip="Анулиране на промените">
+        <span class="glyphicon glyphicon-remove"></span> Анулиране
+    </a>
 </form>

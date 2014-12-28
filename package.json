@@ -1,6 +1,6 @@
 {
     "name": "openmed",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "An angular node-webkit application",
     "main": "index.html",
     "private": true,
@@ -16,9 +16,11 @@
         "win",
         "osx"
     ],
+    "chromium-args" : "--enable-smooth-scrolling --disable-accelerated-video --enable-webgl --enable-webaudio --ignore-gpu-blacklist --force-compositing-mode --harmony",
     "window": {
-        "toolbar": true,
+        "toolbar": false,
         "resizable": true,
+        "frame": true,
         "width": 1000,
         "height": 600,
         "min_width": 600,

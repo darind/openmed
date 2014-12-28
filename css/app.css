@@ -4,6 +4,7 @@
 
 body {
     padding-top: 50px;
+    padding: 50px;
 }
 
 #container {
@@ -40,5 +41,16 @@ body {
 
     .onlyprint {
         display: block;
+    }
+
+    .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: visible !important;
+    }
+
+    pre {
+        border: none;
     }
 }
