@@ -1,6 +1,6 @@
 {
     "name": "openmed",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "An angular node-webkit application",
     "main": "index.html",
     "private": true,
@@ -30,7 +30,8 @@
     "author": "Darin Dimitrov",
     "license": "MIT",
     "dependencies": {
-        "lowdb": "^0.6.0",
+        "lodash": "~2.4.1",
+        "steno": "^0.3.1",
         "uuid": "^2.0.1",
         "moment": "~2.8.4"
     }

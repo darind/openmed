@@ -9,10 +9,10 @@
 <div class="modal-body onlyscreen" style="padding:20px 50px 0;">
     <form name="examForm" novalidate>
         <div class="row">
-            <div class="form-group">
-                <label for="date">Дата *</label>
+            <div class="form-group has-feedback" ng-class="{'has-error': !examForm.$valid}">
+                <label for="date" class="control-label">Дата *</label>
                 <p class="input-group">
-                    <input type="text" class="form-control" id="date" is-open="opened" datepicker-popup="dd.MM.yyyy" show-button-bar="false" ng-model="exam.date" is-open="false" show-weeks="false" starting-day="1" close-text="Close" required aw-datepicker-pattern="DD.MM.YYYY" />
+                    <input type="text" class="form-control" id="date" name="date" is-open="opened" datepicker-popup="dd.MM.yyyy" show-button-bar="false" ng-model="exam.date" is-open="false" show-weeks="false" starting-day="1" close-text="Close" required aw-datepicker-pattern="DD.MM.YYYY" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open($event)">
                             <i class="glyphicon glyphicon-calendar"></i>

@@ -2,7 +2,10 @@
 'use strict';
     var app = angular.module('patientsApp');
     app.controller('patientsController', ['$scope', '$location', '$modal', 'patientsService', function ($scope, $location, $modal, patientsService) {
-        $scope.patients = patientsService.findAll();
+        $scope.patients = [];
+        patientsService.init(function() {
+            $scope.patients = this.findAll();
+        });
 
         $scope.delete = function(patient) {
             $modal.open({

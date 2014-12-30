@@ -1,13 +1,15 @@
 ﻿<form name="patientForm" class="css-form onlyscreen" novalidate>
     <div class="form-group has-feedback" ng-class="{'has-error': !patientForm.name.$valid}">
-        <label for="name">Име *</label>
-        <input type="text" id="name" ng-model="patient.name" class="form-control" placeholder="Име на пациент" name="name" required />
+        <label for="name" class="control-label">Име *</label>
+        <input type="text" id="name" ng-model="patient.name" class="form-control" placeholder="Име на пациент" name="name" required autofocus />
+        <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="!patientForm.name.$valid"></span>
     </div>
 
     <div class="form-group has-feedback" ng-class="{'has-error': !patientForm.egn.$valid}">
-        <label for="egn">ЕГН *</label>
+        <label for="egn" class="control-label">ЕГН *</label>
         <input type="text" id="egn" ng-model="patient.egn" class="form-control" placeholder="ЕГН" name="egn" required ng-pattern="/^\d{10}$/" ng-unique />
-        <span ng-show="patientForm.egn.$error.unique">Пациент с посоченото ЕГН вече съществува</span>
+        <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="!patientForm.egn.$valid"></span>
+        <span class="control-label" ng-show="patientForm.egn.$error.unique">Друг пациент с посоченото ЕГН вече съществува</span>
     </div>
 
     <h4>

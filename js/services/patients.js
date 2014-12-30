@@ -1,13 +1,37 @@
 (function () {
 'use strict';
+    var uuid  = require('uuid'),
+        gui = require('nw.gui'),
+        patients = null;
 
-    var low      = require('lowdb'),
-        uuid     = require('uuid'),
-        db       = low('patients.json'),
-        patients = db('patients');
-
-    angular.module('patientsApp').factory('patientsService', function () {
+    angular.module('patientsApp').factory('patientsService', ['$modal', '$q', '$timeout', function ($modal, $q, $timeout) {
         return {
+            init: function(next) {
+                var deferred = $q.defer();
+                var $that = this;
+                if (patients) {
+                    $timeout(function() {
+                        deferred.resolve(next.call($that, patients));
+                    }, 0);
+                } else {
+                    $modal.open({
+                        templateUrl: 'tmpl/password.html',
+                        controller: 'passwordController',
+                        size: 'md',
+                        backdropClass: 'backdrop',
+                        backdrop: 'static',
+                        resolve: { 
+                            nextFn: function() { 
+                                return function(p) {
+                                    patients = p;
+                                    deferred.resolve(next.call($that, patients));
+                                }; 
+                            } 
+                        }
+                    }).result.then(function(password) { }, gui.App.quit);
+                }
+                return deferred.promise;
+            },
             findAll: function() {
                 return patients.cloneDeep().sortBy('name').value();
             },
@@ -43,7 +67,7 @@
                 patients.remove({ id: id });
             }
         };
-    });
+    }]);
 
     function processPatient(patient) {
         if (patient.firstVisit && patient.firstVisit instanceof Date) {

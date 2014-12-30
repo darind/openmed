@@ -3,4 +3,5 @@
 **/output/*
 **/*.log
 patients.json
+patients.db
 npm-debug.log
