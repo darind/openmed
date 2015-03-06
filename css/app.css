@@ -35,6 +35,10 @@ body {
 }
 
 @media print {
+    .modal-content {
+        border: none;
+    }
+
     .onlyscreen {
         display: none;
     }

@@ -1,6 +1,6 @@
 {
     "name": "openmed",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "An angular node-webkit application",
     "main": "index.html",
     "private": true,
